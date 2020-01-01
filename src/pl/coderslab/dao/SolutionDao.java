@@ -17,6 +17,8 @@ public class SolutionDao {
             "DELETE FROM solution WHERE id = ?";
     private static final String FIND_ALL_SOLUTIONS_QUERY =
             "SELECT * FROM solution";
+    private static final String FIND_ALL_BY_USER_ID =
+            "SELECT * FROM solution JOIN users ON solution.users_id = users.id WHERE users.id=?";
 
 
     public Solution create(Solution solution) {
@@ -120,6 +122,30 @@ public class SolutionDao {
             return null;
         }
     }
+
+    public Solution[] findAllByUserId(int userId) {
+        try (Connection conn = DBUtil.getConnection()) {
+            Solution[] solutions = new Solution[0];
+            PreparedStatement statement = conn.prepareStatement(FIND_ALL_BY_USER_ID);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Solution solution = new Solution(
+                        resultSet.getInt("id"),
+                        resultSet.getTimestamp("created"),
+                        resultSet.getTimestamp("updated"),
+                        resultSet.getString("description"),
+                        resultSet.getInt("exercise_id"),
+                        resultSet.getInt("users_id"));
+                solutions = addToArray(solution, solutions);
+            }
+            return solutions;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
 }

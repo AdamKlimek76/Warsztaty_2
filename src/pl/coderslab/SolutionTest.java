@@ -1,10 +1,7 @@
 package pl.coderslab;
 
-import pl.coderslab.dao.ExerciseDao;
 import pl.coderslab.dao.SolutionDao;
-import pl.coderslab.model.Exercise;
 import pl.coderslab.model.Solution;
-
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,10 +23,10 @@ public class SolutionTest {
         solution.setUpdated(date);
         solution.setId(5);
         solution.setDescription("Zmieniony opis zadania");
-        solutionDao.update(solution);
+        //solutionDao.update(solution);
         //solutionDao.create(solution);
-        solutionDao.delete(5);
-        Solution[] solutions = solutionDao.findAll();
+        //solutionDao.delete(5);
+        Solution[] solutions = solutionDao.findAllByUserId(11);
         try {
             int i = 0;
             while (solutions[i] != null) {
