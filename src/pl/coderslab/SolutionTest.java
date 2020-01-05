@@ -26,7 +26,7 @@ public class SolutionTest {
         //solutionDao.update(solution);
         //solutionDao.create(solution);
         //solutionDao.delete(5);
-        Solution[] solutions = solutionDao.findAllByUserId(11);
+        Solution[] solutions = solutionDao.findAllByExerciseId(1);
         try {
             int i = 0;
             while (solutions[i] != null) {

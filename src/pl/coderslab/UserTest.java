@@ -11,7 +11,7 @@ public class UserTest {
         UserDao userDao = new UserDao();
         //userDao.update(user);
         userDao.delete(21);
-        User[] users = userDao.findAll();
+        User[] users = userDao.findAllByGroupId(4);
         try {
             int i = 0;
             while (users[i] != null) {
