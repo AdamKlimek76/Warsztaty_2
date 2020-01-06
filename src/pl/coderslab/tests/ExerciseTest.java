@@ -1,9 +1,7 @@
-package pl.coderslab;
+package pl.coderslab.tests;
 
 import pl.coderslab.dao.ExerciseDao;
-import pl.coderslab.dao.UserGroupDao;
 import pl.coderslab.model.Exercise;
-import pl.coderslab.model.UserGroup;
 
 public class ExerciseTest {
 
@@ -18,17 +16,12 @@ public class ExerciseTest {
         //exerciseDao.create(exercise);
         exerciseDao.delete(4);
         Exercise[] exercises = exerciseDao.findAll();
-        try {
-            int i = 0;
-            while (exercises[i] != null) {
-                System.out.println(exercises[i]);
-                i++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+        for (int i = 0; i < exercises.length; i++) {
+            System.out.println(exercises[i]);
         }
 
         System.out.println(exerciseDao.read(4));
     }
+
 
 }

@@ -1,8 +1,6 @@
-package pl.coderslab;
+package pl.coderslab.tests;
 
-import pl.coderslab.dao.UserDao;
 import pl.coderslab.dao.UserGroupDao;
-import pl.coderslab.model.User;
 import pl.coderslab.model.UserGroup;
 
 public class UserGroupTest {
@@ -17,16 +15,11 @@ public class UserGroupTest {
         //userGroupDao.create(userGroup);
         userGroupDao.delete(7);
         UserGroup[] userGroups = userGroupDao.findAll();
-        try {
-            int i = 0;
-            while (userGroups[i] != null) {
-                System.out.println(userGroups[i]);
-                i++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+        for (int i = 0; i < userGroups.length; i++) {
+            System.out.println(userGroups[i]);
         }
 
         System.out.println(userGroupDao.read(4));
     }
+
 }

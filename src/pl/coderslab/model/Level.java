@@ -6,8 +6,8 @@ public class Level {
     private int level;
 
     public Level() {
-        this.id=0;
-        this.level=0;
+        this.id = 0;
+        this.level = 0;
     }
 
     public Level(int id, int level) {
@@ -31,7 +31,7 @@ public class Level {
         this.level = level;
     }
 
-    public String toString(){
+    public String toString() {
         return id + " level " + level;
     }
 }

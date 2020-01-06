@@ -8,10 +8,10 @@ public class Comment {
     private String comment;
 
     public Comment() {
-        this.id=0;
-        this.userId=0;
-        this.solutionId=0;
-        this.comment=null;
+        this.id = 0;
+        this.userId = 0;
+        this.solutionId = 0;
+        this.comment = null;
     }
 
     public Comment(int id, int userId, int solutionId, String comment) {
@@ -53,7 +53,7 @@ public class Comment {
         this.comment = comment;
     }
 
-    public String toString(){
+    public String toString() {
         return id + " userId " + userId + " solutionId " + solutionId + " " + comment;
     }
 }

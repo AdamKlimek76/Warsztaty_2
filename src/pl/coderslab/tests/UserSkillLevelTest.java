@@ -1,9 +1,9 @@
-package pl.coderslab;
+package pl.coderslab.tests;
 
 import pl.coderslab.dao.UserSkillLevelDao;
 import pl.coderslab.model.UserSkillLevel;
 
-public class TestUserSkillLevel {
+public class UserSkillLevelTest {
 
     public static void main(String[] args) {
 
@@ -15,17 +15,10 @@ public class TestUserSkillLevel {
         //userSkillLevelDao.create(userSkillLevel);
         userSkillLevelDao.delete(9);
         UserSkillLevel[] userSkillLevels = userSkillLevelDao.findAll();
-        try {
-            int i = 0;
-            while (userSkillLevels[i] != null) {
-                System.out.println(userSkillLevels[i]);
-                i++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+        for (int i = 0; i < userSkillLevels.length; i++) {
+            System.out.println(userSkillLevels[i]);
         }
 
         System.out.println(userSkillLevelDao.read(9));
     }
-
 }

@@ -20,6 +20,8 @@ public class UserDao {
             "SELECT * FROM users";
     private static final String FIND_ALL_BY_GROUP_QUERY =
             "SELECT * FROM users JOIN user_group ON users.user_group_id = user_group.id WHERE user_group.id=?";
+    private static final String READ_USER_BY_EMAIL_QUERY =
+            "SELECT * FROM users WHERE email = ?";
 
 
     public User create(User user) {
@@ -138,6 +140,27 @@ public class UserDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    public User readUserByEmail(String userEmail) {
+        try (Connection conn = DBUtil.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(READ_USER_BY_EMAIL_QUERY);
+            statement.setString(1, userEmail);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                User user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getInt("user_group_id"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

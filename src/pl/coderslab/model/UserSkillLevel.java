@@ -8,10 +8,10 @@ public class UserSkillLevel {
     private int levelId;
 
     public UserSkillLevel() {
-        this.id=0;
-        this.userId=0;
-        this.skillId=0;
-        this.levelId=0;
+        this.id = 0;
+        this.userId = 0;
+        this.skillId = 0;
+        this.levelId = 0;
     }
 
     public UserSkillLevel(int id, int userId, int skillId, int levelId) {
@@ -53,7 +53,7 @@ public class UserSkillLevel {
         this.levelId = levelId;
     }
 
-    public String toString(){
+    public String toString() {
         return id + " userId=" + userId + " skillId=" + skillId + " levelId=" + levelId;
     }
 }

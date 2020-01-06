@@ -1,9 +1,7 @@
-package pl.coderslab;
+package pl.coderslab.tests;
 
 import pl.coderslab.dao.SkillDao;
-import pl.coderslab.dao.UserGroupDao;
 import pl.coderslab.model.Skill;
-import pl.coderslab.model.UserGroup;
 
 public class SkillTest {
 
@@ -18,14 +16,8 @@ public class SkillTest {
         //skillDao.create(skill);
         skillDao.delete(9);
         Skill[] skills = skillDao.findAll();
-        try {
-            int i = 0;
-            while (skills[i] != null) {
-                System.out.println(skills[i]);
-                i++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+        for (int i = 0; i < skills.length; i++) {
+            System.out.println(skills[i]);
         }
 
         System.out.println(skillDao.read(4));

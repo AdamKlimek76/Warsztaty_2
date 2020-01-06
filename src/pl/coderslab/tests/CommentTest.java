@@ -1,9 +1,7 @@
-package pl.coderslab;
+package pl.coderslab.tests;
 
 import pl.coderslab.dao.CommentDao;
-import pl.coderslab.dao.ExerciseDao;
 import pl.coderslab.model.Comment;
-import pl.coderslab.model.Exercise;
 
 public class CommentTest {
 
@@ -16,18 +14,11 @@ public class CommentTest {
         //commentDao.create(comment);
         commentDao.delete(4);
         Comment[] comments = commentDao.findAll();
-        try {
-            int i = 0;
-            while (comments[i] != null) {
-                System.out.println(comments[i]);
-                i++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+        for (int i = 0; i < comments.length; i++) {
+            System.out.println(comments[i]);
         }
 
         System.out.println(commentDao.read(4));
     }
-
 
 }

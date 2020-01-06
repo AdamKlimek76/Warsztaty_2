@@ -6,8 +6,8 @@ public class Skill {
     private String skill;
 
     public Skill() {
-        this.id=0;
-        this.skill=null;
+        this.id = 0;
+        this.skill = null;
     }
 
     public Skill(int id, String skill) {
@@ -31,7 +31,7 @@ public class Skill {
         this.skill = skill;
     }
 
-    public String toString(){
+    public String toString() {
         return id + " " + skill;
     }
 }

@@ -1,8 +1,6 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Exercise;
-import pl.coderslab.model.User;
-import pl.coderslab.model.UserGroup;
 import pl.coderslab.util.DBUtil;
 
 import java.sql.*;
@@ -19,6 +17,10 @@ public class ExerciseDao {
             "DELETE FROM exercise WHERE id = ?";
     private static final String FIND_ALL_EXERCISES_QUERY =
             "SELECT * FROM exercise";
+    private static final String FIND_EXERCISES_WITH_SOLUTIONS_ADDED_BY_USER_WITH_ID_QUERY =
+            "SELECT exercise.id, exercise.title, exercise.description FROM exercise " +
+                    "JOIN solution ON exercise.id = solution.exercise_id " +
+                    "WHERE solution.users_id = ? GROUP BY exercise.id";
 
 
     public Exercise create(Exercise exercise) {
@@ -95,6 +97,26 @@ public class ExerciseDao {
         try (Connection conn = DBUtil.getConnection()) {
             Exercise[] exercises = new Exercise[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_EXERCISES_QUERY);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Exercise exercise = new Exercise(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("description"));
+                exercises = addToArray(exercise, exercises);
+            }
+            return exercises;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Exercise[] findAllWithSolutionsAddedByUserWithId(int userId) {
+        try (Connection conn = DBUtil.getConnection()) {
+            Exercise[] exercises = new Exercise[0];
+            PreparedStatement statement = conn.prepareStatement(FIND_EXERCISES_WITH_SOLUTIONS_ADDED_BY_USER_WITH_ID_QUERY);
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Exercise exercise = new Exercise(

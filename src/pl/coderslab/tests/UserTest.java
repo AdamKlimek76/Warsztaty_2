@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.tests;
 
 import pl.coderslab.dao.UserDao;
 import pl.coderslab.model.User;
@@ -12,16 +12,11 @@ public class UserTest {
         //userDao.update(user);
         userDao.delete(21);
         User[] users = userDao.findAllByGroupId(4);
-        try {
-            int i = 0;
-            while (users[i] != null) {
-                System.out.println(users[i]);
-                i++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+        for (int i = 0; i < users.length; i++) {
+            System.out.println(users[i]);
         }
 
         System.out.println(userDao.read(20));
     }
+
 }

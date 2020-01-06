@@ -2,6 +2,7 @@ package pl.coderslab.dao;
 
 import pl.coderslab.model.Solution;
 import pl.coderslab.util.DBUtil;
+
 import java.sql.*;
 import java.util.Arrays;
 
@@ -21,7 +22,8 @@ public class SolutionDao {
             "SELECT * FROM solution JOIN users ON solution.users_id = users.id WHERE users.id=?";
     private static final String FIND_ALL_BY_EXERCISE_ID =
             "SELECT * FROM solution JOIN exercise ON solution.exercise_id = exercise.id WHERE exercise.id=?";
-
+    private static final String CREATE_SOLUTION_BY_USER_iD_AND_EXERCISE_ID_QUERY =
+            "INSERT INTO solution(created, updated, description, exercise_id, users_id) VALUES (?, null, ?, ?, ?)";
 
     public Solution create(Solution solution) {
         try (Connection conn = DBUtil.getConnection()) {
@@ -169,6 +171,28 @@ public class SolutionDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Solution createByUserAndExerciseId(Solution solution) {
+        try (Connection conn = DBUtil.getConnection()) {
+            PreparedStatement statement =
+                    conn.prepareStatement(CREATE_SOLUTION_BY_USER_iD_AND_EXERCISE_ID_QUERY, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setTimestamp(1, solution.getCreated());
+            statement.setString(2, solution.getDescription());
+            statement.setInt(3, solution.getExerciseId());
+            statement.setInt(4, solution.getUsersId());
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                solution.setId(resultSet.getInt(1));
+            }
+            return solution;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 

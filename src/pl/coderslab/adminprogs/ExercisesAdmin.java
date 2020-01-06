@@ -2,6 +2,7 @@ package pl.coderslab.adminprogs;
 
 import pl.coderslab.dao.ExerciseDao;
 import pl.coderslab.model.Exercise;
+
 import java.util.Scanner;
 
 public class ExercisesAdmin {
@@ -64,7 +65,7 @@ public class ExercisesAdmin {
         }
     }
 
-    private static Exercise setExercise(){
+    private static Exercise setExercise() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj tytuł zadania ");
         String title = scan.nextLine();
@@ -74,7 +75,7 @@ public class ExercisesAdmin {
         return exercise;
     }
 
-    private static int setExerciseId(){
+    private static int setExerciseId() {
         System.out.println("Podaj id zadania: ");
         Scanner scan = new Scanner(System.in);
         while (!scan.hasNextInt()) {

@@ -45,4 +45,12 @@ public class Exercise {
     public String toString() {
         return id + " " + title + " " + description;
     }
+
+    public boolean equals(Exercise exercise) {
+        if (this.id == exercise.id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
